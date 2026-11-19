@@ -125,7 +125,7 @@ function draw(){
  ctx.clearRect(0,0,1448,1024);
  ctx.drawImage(BG,0,0,1448,1024);
 
- // 清除原证书中所有需要替换的文字区域。
+ // 完整清除原证书中需要替换的文字区域。
  const masks=[
   [145,405,490,470],
   [195,490,1325,555],
@@ -139,7 +139,7 @@ function draw(){
  const ink='#26313e',red='#9b2020',rule='#cfd2d6';
  const serif='"Noto Serif CJK SC","Songti SC","SimSun",serif';
 
- // 获奖者
+ // 获奖者姓名
  ctx.textAlign='left';
  ctx.fillStyle=ink;
  ctx.font=`bold 29px ${serif}`;
@@ -158,7 +158,7 @@ function draw(){
  ctx.fillText('期间举办的',815,537);
  fitText('“'+value('activity')+'”',1005,537,285,27,17,red,'bold');
 
- // 日期下方的细线
+ // 日期下方细线
  ctx.strokeStyle=rule;
  ctx.lineWidth=2;
  ctx.beginPath();
@@ -167,19 +167,20 @@ function draw(){
  ctx.moveTo(1007,545);ctx.lineTo(1290,545);
  ctx.stroke();
 
- // 表彰正文：重新绘制整段，不保留原来的旧文字。
+ // 正文固定文字
  ctx.font=`normal 28px ${serif}`;
  ctx.fillStyle=ink;
  ctx.textAlign='left';
  ctx.fillText('志愿活动中，被评为',165,610);
 
- fitText('“'+value('award')+'”',455,610,255,29,18,'#c51f1f','bold');
+ // 荣誉称号：字号加大、加粗、保留红色，长称号自动缩小。
+ fitText('“'+value('award')+'”',455,610,255,34,23,'#c51f1f','bold');
 
  ctx.font=`normal 28px ${serif}`;
  ctx.fillStyle=ink;
  ctx.fillText('。您在',725,610);
 
- // 贡献描述最多分为两行，自动缩小字号。
+ // 贡献描述最多两行，自动缩小字号。
  const contribution=[...value('contribution')];
  let fontSize=27,firstLine='',secondLine='';
  const firstMax=430,secondMax=1110;
@@ -188,35 +189,29 @@ function draw(){
   firstLine='';
   secondLine='';
   for(const ch of contribution){
-   if(ctx.measureText(firstLine+ch).width<=firstMax){
-    firstLine+=ch;
-   }else{
-    secondLine+=ch;
-   }
+   if(ctx.measureText(firstLine+ch).width<=firstMax)firstLine+=ch;
+   else secondLine+=ch;
   }
  }
 
  while(true){
   ctx.font=`bold italic ${fontSize}px ${serif}`;
   splitContribution();
-  if(ctx.measureText(secondLine).width<=secondMax || fontSize<=18)break;
+  if(ctx.measureText(secondLine).width<=secondMax||fontSize<=18)break;
   fontSize--;
  }
 
  if(ctx.measureText(secondLine).width>secondMax){
-  while(secondLine.length>0 && ctx.measureText(secondLine+'…').width>secondMax){
-   secondLine=secondLine.slice(0,-1);
-  }
+  while(secondLine.length>0&&ctx.measureText(secondLine+'…').width>secondMax)secondLine=secondLine.slice(0,-1);
   secondLine+='…';
  }
 
  ctx.font=`bold italic ${fontSize}px ${serif}`;
  ctx.fillStyle=ink;
-
  if(firstLine)ctx.fillText(firstLine,845,610);
  if(secondLine)ctx.fillText(secondLine,165,660);
 
- // 横线移到第二行文字下方，不再穿过文字。
+ // 横线放在文字下方
  ctx.strokeStyle=rule;
  ctx.lineWidth=2;
  ctx.beginPath();
@@ -224,7 +219,7 @@ function draw(){
  ctx.lineTo(1282,690);
  ctx.stroke();
 
- // 颁发日期：固定标签和日期一起重绘。
+ // 颁发日期
  ctx.font=`normal 23px ${serif}`;
  ctx.fillStyle='#4e5968';
  ctx.fillText('颁发日期：',930,897);
