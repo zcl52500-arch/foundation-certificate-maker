@@ -46,47 +46,84 @@ footer{max-width:1440px;margin:0 auto 28px;padding:0 20px;color:#7a8391;font-siz
 </head>
 <body>
 <header>
- <div><div class="brand">荣誉证书生成器</div><div class="sub">四川国际标榜职业学院教育基金会 · 原版式证书在线填写与导出</div></div>
+ <div>
+  <div class="brand">荣誉证书生成器</div>
+  <div class="sub">四川国际标榜职业学院教育基金会 · 原版式证书在线填写与导出</div>
+ </div>
  <div class="sub">单人填写 · 实时预览 · PDF打印</div>
 </header>
+
 <main>
  <section class="panel form-panel">
   <h2>填写证书信息</h2>
-  <label for="name">获奖者姓名</label><input id="name" value="何汶静" maxlength="12">
-  <label for="start">活动开始日期</label><input id="start" value="2025年11月30日">
-  <label for="end">活动结束日期</label><input id="end" value="2025年12月28日">
-  <label for="activity">活动名称</label><input id="activity" value="社区环境微改造" maxlength="18">
-  <label for="award">荣誉称号</label><input id="award" value="优秀志愿者" maxlength="14">
+
+  <label for="name">获奖者姓名</label>
+  <input id="name" value="何汶静" maxlength="12">
+
+  <label for="start">活动开始日期</label>
+  <input id="start" value="2025年11月30日">
+
+  <label for="end">活动结束日期</label>
+  <input id="end" value="2025年12月28日">
+
+  <label for="activity">活动名称</label>
+  <input id="activity" value="社区环境微改造" maxlength="18">
+
+  <label for="award">荣誉称号</label>
+  <input id="award" value="优秀志愿者" maxlength="14">
+
   <label for="contribution">贡献描述</label>
   <textarea id="contribution">内容规划、方案绘制与活动流程设计等工作中发挥了模范带头作用。</textarea>
-  <div class="hint">建议贡献描述控制在约 35 个汉字以内，过长时系统会自动缩小字号并换行。</div>
-  <label for="issue">证书颁发日期</label><input id="issue" value="2026年3月20日">
+  <div class="hint">建议贡献描述控制在约35个汉字以内，过长时系统会自动缩小字号并换行。</div>
+
+  <label for="issue">证书颁发日期</label>
+  <input id="issue" value="2026年3月20日">
+
   <div class="actions">
    <button class="primary" id="printBtn">生成 / 打印 PDF</button>
    <button class="secondary" id="resetBtn">恢复示例</button>
   </div>
-  <div class="hint">点击“生成 / 打印 PDF”，在浏览器打印窗口中选择“另存为 PDF”，纸张选择 A4、横向、边距“无”。</div>
+
+  <div class="hint">点击生成 / 打印 PDF，在浏览器打印窗口中选择另存为 PDF，纸张选择 A4、横向、边距无。</div>
+
   <div class="batch">
-   <label for="csv">批量数据（CSV，可选）</label>
+   <label for="csv">批量数据（Excel / CSV）</label>
    <input id="csv" type="file" accept=".csv,.xlsx,.xls,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
-   <div class="hint">支持 Excel（.xlsx/.xls）或 CSV。表头依次为：姓名、开始日期、结束日期、活动名称、荣誉称号、贡献描述、颁发日期。导入后可逐条预览，也可一键批量导出为 ZIP（每人一份 PDF）。</div>
+
+   <div class="hint">
+    支持四列表格：姓名、班级/专业、志愿者称号、突出贡献。班级/专业自动忽略；活动日期、活动名称和颁发日期沿用上方填写内容。也兼容原七列表格。日期自动转换为中文格式。
+   </div>
+
    <div class="actions">
     <button class="secondary" id="prevBtn" disabled>上一条</button>
     <button class="secondary" id="nextBtn" disabled>下一条</button>
    </div>
+
    <div class="actions">
     <button class="primary" id="bulkBtn" disabled>批量生成全部 PDF（ZIP）</button>
    </div>
+
    <div class="status" id="status"></div>
   </div>
  </section>
+
  <section class="panel preview-panel">
-  <div class="preview-head"><h2>证书实时预览</h2><span class="sub">原版横向 A4 · 固定版式</span></div>
-  <div class="canvas-wrap"><canvas id="cert" width="2896" height="2048"></canvas></div>
-  <div class="preview-note">预览会随左侧填写内容实时更新。原始 Logo、金色边框、标题、固定文案及落款均保留；仅替换指定信息。</div>
+  <div class="preview-head">
+   <h2>证书实时预览</h2>
+   <span class="sub">原版横向 A4 · 固定版式</span>
+  </div>
+  <div class="canvas-wrap">
+   <canvas id="cert" width="2896" height="2048"></canvas>
+  </div>
+  <div class="preview-note">
+   预览会随左侧填写内容实时更新。原始Logo、金色边框、标题、固定文案及落款均保留；仅替换指定信息。
+  </div>
  </section>
 </main>
-<footer>证书数据在浏览器本地处理，不会上传到本网站服务器。批量导出需要联网加载 PDF/Excel/ZIP 处理库（来自 jsDelivr CDN）；文件内容仍在本机浏览器中处理。</footer>
+
+<footer>
+证书数据在浏览器本地处理，不会上传到本网站服务器。批量导出需要联网加载 PDF、Excel、ZIP 处理库。
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
@@ -96,36 +133,141 @@ footer{max-width:1440px;margin:0 auto 28px;padding:0 20px;color:#7a8391;font-siz
 const BG = new Image();
 BG.src = 'certificate-original.jpg';
 
-const canvas=document.getElementById('cert'),ctx=canvas.getContext('2d');
+const canvas=document.getElementById('cert');
+const ctx=canvas.getContext('2d');
 ctx.setTransform(2,0,0,2,0,0);
 
 const ids=['name','start','end','activity','award','contribution','issue'];
-const defaults={name:'何汶静',start:'2025年11月30日',end:'2025年12月28日',activity:'社区环境微改造',award:'优秀志愿者',contribution:'内容规划、方案绘制与活动流程设计等工作中发挥了模范带头作用。',issue:'2026年3月20日'};
+
+const defaults={
+ name:'何汶静',
+ start:'2025年11月30日',
+ end:'2025年12月28日',
+ activity:'社区环境微改造',
+ award:'优秀志愿者',
+ contribution:'内容规划、方案绘制与活动流程设计等工作中发挥了模范带头作用。',
+ issue:'2026年3月20日'
+};
+
 let rows=[],rowIndex=0;
 
 const $=id=>document.getElementById(id);
-function value(id){return $(id).value.trim();}
+
+function value(id){
+ return $(id).value.trim();
+}
+
+/* ==============================
+   Excel 日期自动识别与转换
+   ============================== */
+
+function normalizeDateValue(input){
+
+ if(input===null || input===undefined || input===''){
+  return '';
+ }
+
+ // Date 对象
+ if(input instanceof Date && !Number.isNaN(input.getTime())){
+  return `${input.getUTCFullYear()}年${input.getUTCMonth()+1}月${input.getUTCDate()}日`;
+ }
+
+ // Excel 内部日期序列值
+ if(typeof input==='number' && Number.isFinite(input)){
+
+  if(input>0 && input<100000){
+
+   let parts=null;
+
+   if(window.XLSX && XLSX.SSF && typeof XLSX.SSF.parse_date_code==='function'){
+    parts=XLSX.SSF.parse_date_code(input);
+   }
+
+   if(parts && parts.y && parts.m && parts.d){
+    return `${parts.y}年${parts.m}月${parts.d}日`;
+   }
+
+   // Excel 1900 日期系统
+   const date=new Date(Date.UTC(1899,11,30)+Math.floor(input)*86400000);
+
+   return `${date.getUTCFullYear()}年${date.getUTCMonth()+1}月${date.getUTCDate()}日`;
+  }
+
+  return String(input);
+ }
+
+ const text=String(input).trim();
+
+ if(!text)return '';
+
+ // 2026-11-16 / 2026/11/16 / 2026年11月16日
+ let m=text.match(/^(\d{4})\s*[-/.年]\s*(\d{1,2})\s*[-/.月]\s*(\d{1,2})\s*日?$/);
+
+ if(m){
+  return `${Number(m[1])}年${Number(m[2])}月${Number(m[3])}日`;
+ }
+
+ // 11/16/26
+ m=text.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+
+ if(m){
+
+  let year=Number(m[3]);
+
+  if(year<100){
+   year += year<50 ? 2000 : 1900;
+  }
+
+  const month=Number(m[1]);
+  const day=Number(m[2]);
+
+  const check=new Date(Date.UTC(year,month-1,day));
+
+  if(
+   check.getUTCFullYear()===year &&
+   check.getUTCMonth()===month-1 &&
+   check.getUTCDate()===day
+  ){
+   return `${year}年${month}月${day}日`;
+  }
+ }
+
+ return text;
+}
+
+/* ==============================
+   证书绘制
+   ============================== */
 
 function fitText(text,x,y,maxW,maxSize,minSize,color,font,align='left'){
+
  let size=maxSize;
+
  ctx.textAlign=align;
  ctx.fillStyle=color;
+
  while(size>minSize){
+
   ctx.font=`${font} ${size}px "Noto Serif CJK SC","Songti SC","SimSun",serif`;
+
   if(ctx.measureText(text).width<=maxW)break;
+
   size--;
  }
+
  ctx.fillText(text,x,y);
+
  return size;
 }
 
 function draw(){
+
  if(!BG.complete || !BG.naturalWidth)return;
 
  ctx.clearRect(0,0,1448,1024);
  ctx.drawImage(BG,0,0,1448,1024);
 
- // 完整清除原证书中需要替换的文字区域。
+ // 清除原证书中的可变文字区域
  const masks=[
   [145,405,490,470],
   [195,490,1325,555],
@@ -134,86 +276,138 @@ function draw(){
  ];
 
  ctx.fillStyle='#ffffff';
- masks.forEach(([x1,y1,x2,y2])=>ctx.fillRect(x1,y1,x2-x1,y2-y1));
 
- const ink='#26313e',red='#9b2020',rule='#cfd2d6';
+ masks.forEach(([x1,y1,x2,y2])=>{
+  ctx.fillRect(x1,y1,x2-x1,y2-y1);
+ });
+
+ const ink='#26313e';
+ const red='#9b2020';
+ const rule='#cfd2d6';
+
  const serif='"Noto Serif CJK SC","Songti SC","SimSun",serif';
 
  // 获奖者姓名
  ctx.textAlign='left';
  ctx.fillStyle=ink;
  ctx.font=`bold 29px ${serif}`;
+
  ctx.fillText('授予',165,452);
+
  fitText(value('name'),250,452,125,30,19,ink,'bold');
+
  ctx.font=`bold 29px ${serif}`;
  ctx.fillText('同学：',380,452);
 
- // 活动日期和活动名称
+ // 活动日期与名称
  ctx.font=`normal 27px ${serif}`;
  ctx.fillStyle=ink;
+
  ctx.fillText('在',220,537);
+
  fitText(value('start'),265,537,240,27,19,ink,'normal');
+
  ctx.fillText('至',520,537);
+
  fitText(value('end'),560,537,240,27,19,ink,'normal');
+
  ctx.fillText('期间举办的',815,537);
+
  fitText('“'+value('activity')+'”',1005,537,285,27,17,red,'bold');
 
  // 日期下方细线
  ctx.strokeStyle=rule;
  ctx.lineWidth=2;
+
  ctx.beginPath();
- ctx.moveTo(263,545);ctx.lineTo(514,545);
- ctx.moveTo(557,545);ctx.lineTo(805,545);
- ctx.moveTo(1007,545);ctx.lineTo(1290,545);
+ ctx.moveTo(263,545);
+ ctx.lineTo(514,545);
+ ctx.moveTo(557,545);
+ ctx.lineTo(805,545);
+ ctx.moveTo(1007,545);
+ ctx.lineTo(1290,545);
  ctx.stroke();
 
- // 正文固定文字
+ // 正文
  ctx.font=`normal 28px ${serif}`;
  ctx.fillStyle=ink;
  ctx.textAlign='left';
+
  ctx.fillText('志愿活动中，被评为',165,610);
 
- // 荣誉称号：字号加大、加粗、保留红色，长称号自动缩小。
+ // 荣誉称号：34px、加粗、红色
  fitText('“'+value('award')+'”',455,610,255,34,23,'#c51f1f','bold');
 
  ctx.font=`normal 28px ${serif}`;
  ctx.fillStyle=ink;
+
  ctx.fillText('。您在',725,610);
 
- // 贡献描述最多两行，自动缩小字号。
+ // 贡献描述：自动换行
  const contribution=[...value('contribution')];
- let fontSize=27,firstLine='',secondLine='';
- const firstMax=430,secondMax=1110;
+
+ let fontSize=27;
+ let firstLine='';
+ let secondLine='';
+
+ const firstMax=430;
+ const secondMax=1110;
 
  function splitContribution(){
+
   firstLine='';
   secondLine='';
+
   for(const ch of contribution){
-   if(ctx.measureText(firstLine+ch).width<=firstMax)firstLine+=ch;
-   else secondLine+=ch;
+
+   if(ctx.measureText(firstLine+ch).width<=firstMax){
+    firstLine+=ch;
+   }else{
+    secondLine+=ch;
+   }
   }
  }
 
  while(true){
+
   ctx.font=`bold italic ${fontSize}px ${serif}`;
+
   splitContribution();
-  if(ctx.measureText(secondLine).width<=secondMax||fontSize<=18)break;
+
+  if(ctx.measureText(secondLine).width<=secondMax || fontSize<=18){
+   break;
+  }
+
   fontSize--;
  }
 
  if(ctx.measureText(secondLine).width>secondMax){
-  while(secondLine.length>0&&ctx.measureText(secondLine+'…').width>secondMax)secondLine=secondLine.slice(0,-1);
+
+  while(
+   secondLine.length>0 &&
+   ctx.measureText(secondLine+'…').width>secondMax
+  ){
+   secondLine=secondLine.slice(0,-1);
+  }
+
   secondLine+='…';
  }
 
  ctx.font=`bold italic ${fontSize}px ${serif}`;
  ctx.fillStyle=ink;
- if(firstLine)ctx.fillText(firstLine,845,610);
- if(secondLine)ctx.fillText(secondLine,165,660);
+
+ if(firstLine){
+  ctx.fillText(firstLine,845,610);
+ }
+
+ if(secondLine){
+  ctx.fillText(secondLine,165,660);
+ }
 
  // 横线放在文字下方
  ctx.strokeStyle=rule;
  ctx.lineWidth=2;
+
  ctx.beginPath();
  ctx.moveTo(165,690);
  ctx.lineTo(1282,690);
@@ -222,17 +416,25 @@ function draw(){
  // 颁发日期
  ctx.font=`normal 23px ${serif}`;
  ctx.fillStyle='#4e5968';
+
  ctx.fillText('颁发日期：',930,897);
+
  fitText(value('issue'),1080,897,270,23,16,'#4e5968','normal');
 }
 
 BG.onload=draw;
+
 BG.onerror=()=>{
  const note=document.querySelector('.preview-note');
- if(note)note.textContent='未能读取证书底图，请确认 certificate-original.jpg 与 index.html 位于同一文件夹。';
+
+ if(note){
+  note.textContent='未能读取证书底图，请确认 certificate-original.jpg 与 index.html 位于同一文件夹。';
+ }
 };
 
-ids.forEach(id=>$(id).addEventListener('input',draw));
+ids.forEach(id=>{
+ $(id).addEventListener('input',draw);
+});
 
 $('printBtn').addEventListener('click',()=>{
  draw();
@@ -240,93 +442,298 @@ $('printBtn').addEventListener('click',()=>{
 });
 
 $('resetBtn').addEventListener('click',()=>{
- ids.forEach(id=>$(id).value=defaults[id]);
+
+ ids.forEach(id=>{
+  $(id).value=defaults[id];
+ });
+
  rows=[];
  rowIndex=0;
+
  syncBatch();
  draw();
 });
 
+/* ==============================
+   Excel / CSV 名单导入
+   ============================== */
+
 function syncBatch(){
+
  $('prevBtn').disabled=rows.length===0||rowIndex===0;
+
  $('nextBtn').disabled=rows.length===0||rowIndex>=rows.length-1;
+
  $('bulkBtn').disabled=rows.length===0;
- $('status').textContent=rows.length?`已导入 ${rows.length} 条，当前第 ${rowIndex+1} 条。`:'';
+
+ $('status').textContent=rows.length
+  ?`已导入 ${rows.length} 条，当前第 ${rowIndex+1} 条。`
+  :'';
 }
 
 function applyRow(r){
- ids.forEach((id,i)=>$(id).value=(r[i]??''));
+
+ ids.forEach((id,i)=>{
+
+  const raw=r[i]??'';
+
+  // 三个日期字段统一转换
+  const displayDate=[1,2,6].includes(i)
+   ?normalizeDateValue(raw)
+   :raw;
+
+  $(id).value=String(displayDate??'');
+ });
+
  draw();
  syncBatch();
 }
 
 function parseCSV(text){
+
  const out=[];
+
  let row=[],cell='',quoted=false;
 
  for(let i=0;i<text.length;i++){
-  const ch=text[i],next=text[i+1];
+
+  const ch=text[i];
+  const next=text[i+1];
 
   if(ch==='"'&&quoted&&next==='"'){
-   cell+='"';i++;
+   cell+='"';
+   i++;
   }else if(ch==='"'){
    quoted=!quoted;
   }else if(ch===','&&!quoted){
-   row.push(cell);cell='';
-  }else if((ch==='\n'||ch==='\r')&&!quoted){
-   if(ch==='\r'&&next==='\n')i++;
    row.push(cell);
-   if(row.some(v=>v.trim()))out.push(row);
-   row=[];cell='';
+   cell='';
+  }else if((ch==='\n'||ch==='\r')&&!quoted){
+
+   if(ch==='\r'&&next==='\n')i++;
+
+   row.push(cell);
+
+   if(row.some(v=>v.trim())){
+    out.push(row);
+   }
+
+   row=[];
+   cell='';
+
   }else{
    cell+=ch;
   }
  }
 
  row.push(cell);
- if(row.some(v=>v.trim()))out.push(row);
 
- if(out.length&&out[0][0].replace(/^\uFEFF/,'').trim()==='姓名')out.shift();
+ if(row.some(v=>v.trim())){
+  out.push(row);
+ }
 
  return out;
 }
 
-function cleanRows(data){
- const normalized=data.map(r=>r.map(v=>String(v??'').trim())).filter(r=>r.some(v=>v));
+function normalizeHeader(value){
 
- if(normalized.length){
-  const first=normalized[0][0].replace(/^\uFEFF/,'').trim();
-  if(['姓名','获奖者姓名','name'].includes(first.toLowerCase()))normalized.shift();
+ return String(value??'')
+  .replace(/^\uFEFF/,'')
+  .trim()
+  .toLowerCase()
+  .replace(/[\s\u3000\/_\-（）()：:]/g,'');
+}
+
+function findHeader(headers,aliases){
+
+ const wanted=aliases.map(normalizeHeader);
+
+ return headers.findIndex(h=>wanted.includes(normalizeHeader(h)));
+}
+
+function cleanRows(data){
+
+ // 保留 Excel 原始数值，不提前转换日期
+ const table=data.map(r=>
+  Array.from(r??[],v=>typeof v==='string'?v.trim():v)
+ );
+
+ const nonEmpty=table.filter(r=>
+  r.some(v=>String(v??'').trim()!=='')
+ );
+
+ if(!nonEmpty.length)return [];
+
+ const headers=nonEmpty[0].map(v=>String(v??'').trim());
+
+ const nameCol=findHeader(headers,['姓名','获奖者姓名','name']);
+
+ const awardCol=findHeader(headers,['志愿者称号','荣誉称号','称号','award']);
+
+ const contributionCol=findHeader(headers,['突出贡献','贡献描述','贡献','表彰内容','contribution']);
+
+ const startCol=findHeader(headers,['活动开始日期','开始日期','start date']);
+
+ const endCol=findHeader(headers,['活动结束日期','结束日期','end date']);
+
+ const activityCol=findHeader(headers,['活动名称','项目名称','activity']);
+
+ const issueCol=findHeader(headers,['证书颁发日期','颁发日期','issue date']);
+
+ // 活动日期、活动名称、颁发日期沿用网页上方的统一设置
+ const shared={
+  start:value('start'),
+  end:value('end'),
+  activity:value('activity'),
+  issue:value('issue')
+ };
+
+ const hasRecognizedHeader=nameCol>=0;
+
+ let records=hasRecognizedHeader
+  ?nonEmpty.slice(1)
+  :nonEmpty;
+
+ // 兼容无表头的旧七列表格
+ if(!hasRecognizedHeader){
+
+  return records.map(r=>[
+   r[0]??'',
+   r[1]??shared.start,
+   r[2]??shared.end,
+   r[3]??shared.activity,
+   r[4]??value('award'),
+   r[5]??value('contribution'),
+   r[6]??shared.issue
+  ]).filter(r=>r[0]);
  }
 
- return normalized.map(r=>Array.from({length:7},(_,i)=>r[i]??''));
+ // 识别四列表格：姓名、班级/专业、志愿者称号、突出贡献
+ const isVolunteerRoster=
+  awardCol>=0 &&
+  contributionCol>=0 &&
+  startCol<0 &&
+  endCol<0 &&
+  activityCol<0 &&
+  issueCol<0;
+
+ // 兼容原七列表格
+ if(!isVolunteerRoster && nameCol>=0 && headers.length>=7){
+
+  return records.map(r=>[
+
+   r[nameCol]??'',
+
+   startCol>=0
+    ?(r[startCol]??shared.start)
+    :(r[1]??shared.start),
+
+   endCol>=0
+    ?(r[endCol]??shared.end)
+    :(r[2]??shared.end),
+
+   activityCol>=0
+    ?(r[activityCol]??shared.activity)
+    :(r[3]??shared.activity),
+
+   awardCol>=0
+    ?(r[awardCol]??value('award'))
+    :(r[4]??value('award')),
+
+   contributionCol>=0
+    ?(r[contributionCol]??value('contribution'))
+    :(r[5]??value('contribution')),
+
+   issueCol>=0
+    ?(r[issueCol]??shared.issue)
+    :(r[6]??shared.issue)
+
+  ]).filter(r=>r[0]);
+ }
+
+ if(!isVolunteerRoster){
+
+  throw new Error('没有识别到“志愿者称号”和“突出贡献”列。请检查表头名称。');
+ }
+
+ // 四列表格：忽略班级/专业，保留每个人自己的称号与贡献
+ return records.map(r=>[
+
+  r[nameCol]??'',
+
+  shared.start,
+
+  shared.end,
+
+  shared.activity,
+
+  r[awardCol]??'',
+
+  r[contributionCol]??'',
+
+  shared.issue
+
+ ]).filter(r=>r[0]);
 }
 
 $('csv').addEventListener('change',async e=>{
+
  const f=e.target.files[0];
+
  if(!f)return;
 
  try{
+
   if(/\.xlsx?$|\.xls$/i.test(f.name)){
-   if(!window.XLSX)throw new Error('Excel 读取组件未加载，请检查网络后刷新页面。');
+
+   if(!window.XLSX){
+    throw new Error('Excel 读取组件未加载，请检查网络后刷新页面。');
+   }
 
    const data=await f.arrayBuffer();
+
    const wb=XLSX.read(data,{type:'array'});
+
    const ws=wb.Sheets[wb.SheetNames[0]];
-   rows=cleanRows(XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:''}));
+
+   // 关键：raw:true，保留 Excel 日期序列值
+   rows=cleanRows(
+    XLSX.utils.sheet_to_json(ws,{
+     header:1,
+     raw:true,
+     defval:''
+    })
+   );
+
   }else{
+
    rows=cleanRows(parseCSV(await f.text()));
+
   }
 
   rowIndex=0;
 
-  if(rows.length)applyRow(rows[0]);
-  else $('status').textContent='未读取到有效数据，请检查表格内容。';
+  if(rows.length){
+
+   applyRow(rows[0]);
+
+   $('status').textContent=
+    `已导入 ${rows.length} 条；日期已自动统一为中文格式。`;
+
+  }else{
+
+   $('status').textContent='未读取到有效数据，请检查表格内容。';
+
+  }
 
   syncBatch();
+
  }catch(err){
+
   $('status').textContent='导入失败：'+err.message;
+
  }
+
 });
 
 $('prevBtn').addEventListener('click',()=>{
@@ -337,76 +744,135 @@ $('nextBtn').addEventListener('click',()=>{
  if(rowIndex<rows.length-1)applyRow(rows[++rowIndex]);
 });
 
+/* ==============================
+   批量 PDF + ZIP 导出
+   ============================== */
+
 function safeFilename(s){
- return (String(s||'未命名').replace(/[^\p{L}\p{N}_-]+/gu,'_').replace(/^_+|_+$/g,'').slice(0,50)||'未命名');
+
+ return (
+  String(s||'未命名')
+   .replace(/[^\p{L}\p{N}_-]+/gu,'_')
+   .replace(/^_+|_+$/g,'')
+   .slice(0,50)||'未命名'
+ );
+
 }
 
 async function waitFrame(){
- await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+
+ await new Promise(resolve=>
+  requestAnimationFrame(()=>
+   requestAnimationFrame(resolve)
+  )
+ );
+
 }
 
 $('bulkBtn').addEventListener('click',async()=>{
+
  if(!rows.length)return;
 
  if(!window.jspdf||!window.JSZip){
+
   $('status').textContent='批量导出组件未加载，请检查网络后刷新页面。';
+
   return;
  }
 
  const btn=$('bulkBtn');
+
  btn.disabled=true;
+
  const original=ids.map(id=>$(id).value);
 
  try{
+
   const zip=new JSZip();
+
   const seen={};
 
   for(let i=0;i<rows.length;i++){
+
    applyRow(rows[i]);
+
    await waitFrame();
 
    const {jsPDF}=window.jspdf;
-   const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
 
-   pdf.addImage(canvas.toDataURL('image/jpeg',0.96),'JPEG',0,0,297,210,undefined,'FAST');
+   const pdf=new jsPDF({
+    orientation:'landscape',
+    unit:'mm',
+    format:'a4',
+    compress:true
+   });
+
+   pdf.addImage(
+    canvas.toDataURL('image/jpeg',0.96),
+    'JPEG',
+    0,0,297,210,
+    undefined,
+    'FAST'
+   );
 
    const blob=pdf.output('blob');
+
    const base=safeFilename(rows[i][0]||`证书_${i+1}`);
 
    seen[base]=(seen[base]||0)+1;
 
-   const filename=`${String(i+1).padStart(3,'0')}_${base}${seen[base]>1?'_'+seen[base]:''}.pdf`;
+   const filename=
+    `${String(i+1).padStart(3,'0')}_${base}`+
+    `${seen[base]>1?'_'+seen[base]:''}.pdf`;
 
    zip.file(filename,blob);
 
-   $('status').textContent=`正在生成 ${i+1}/${rows.length}：${filename}`;
+   $('status').textContent=
+    `正在生成 ${i+1}/${rows.length}：${filename}`;
+
   }
 
-  const content=await zip.generateAsync({type:'blob'},meta=>{
-   $('status').textContent=`正在打包 ZIP：${Math.round(meta.percent)}%`;
-  });
+  const content=await zip.generateAsync(
+   {type:'blob'},
+   meta=>{
+    $('status').textContent=
+     `正在打包 ZIP：${Math.round(meta.percent)}%`;
+   }
+  );
 
   const url=URL.createObjectURL(content);
+
   const a=document.createElement('a');
 
   a.href=url;
   a.download='荣誉证书批量导出.zip';
+
   document.body.appendChild(a);
   a.click();
   a.remove();
 
   setTimeout(()=>URL.revokeObjectURL(url),30000);
 
-  $('status').textContent=`完成！已生成 ${rows.length} 份 PDF，并打包下载。`;
+  $('status').textContent=
+   `完成！已生成 ${rows.length} 份 PDF，并打包下载。`;
 
  }catch(err){
+
   $('status').textContent='批量生成失败：'+err.message;
+
  }finally{
-  ids.forEach((id,i)=>$(id).value=original[i]);
+
+  ids.forEach((id,i)=>{
+   $(id).value=original[i];
+  });
+
   draw();
   syncBatch();
+
   btn.disabled=rows.length===0;
+
  }
+
 });
 </script>
 </body>
